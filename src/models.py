@@ -11,7 +11,10 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
+    name = Column(String(20), unique=True, nullable=False)
+    first_name = Column(String(20), unique=True, nullable=False)
     user_name = Column(String(20), unique=True, nullable=False)
+    image = Column(String(120), unique=False, nullable=False)
     email = Column(String(30), unique=True, nullable=False)
     password= Column(Integer, unique=False, nullable=False)
     posts = relationship('post', backref='user', lazy=True)
@@ -23,6 +26,7 @@ class Post(Base):
     __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
     title = Column(String(100),unique=False, nullable=False)
+    image = Column(String(120), unique=False, nullable=False)
     text = Column(String(300),unique=False, nullable=False)
     likes = Column(Integer, nullable=False)
     user_id = Column(Integer, ForeignKey('user.id'))
